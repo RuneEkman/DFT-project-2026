@@ -16,6 +16,10 @@ Plan of action for starting code, 17/04/2026
 - Figure out how to find spin expectation value (TO hasn't sent the script has he?)
 1.3) How to split the work
 - Kinda difficult currently?
+Ideal: Each person writes an isolated class or function. This will prevent interference in the work.
+- One writes a .cif reader
+- One writes the GPAW calc handling
+- One writes a bandstructure calculator
 
 
 2) Add SOC
