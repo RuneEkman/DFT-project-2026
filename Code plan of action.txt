@@ -1,0 +1,21 @@
+Plan of action for starting code, 17/04/2026
+
+1) Recreate the Bandstructure seen in TO's article (Hexagonal MnI2).
+- -\bar{M} to \Gamma to \bar{M}
+- Also a kx-ky Fermi surface cut.
+1.1) Prerequisites:
+- cif file perhaps?
+- GPAW Docs
+- Local installation of ASE and GPAW
+1.2) Procedure:
+- Take input CIF file
+- Figure out how to set the spin helimagnetic order
+- Set up GPAW calc, run the SCF calculation
+-- parameters: LDA XC, PW cutoff 600 eV
+- Set up bandstructure calculation
+- Figure out how to find spin expectation value (TO hasn't sent the script has he?)
+1.3) How to split the work
+- Kinda difficult currently?
+
+
+2) Add SOC
