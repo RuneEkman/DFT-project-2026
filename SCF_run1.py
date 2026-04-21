@@ -1,0 +1,100 @@
+from gpaw.new.ase_interface import GPAW
+from ase import Atoms
+import numpy as np
+from gpaw import FermiDirac
+from ase.visualize import view
+import ase
+from ase.build import make_supercell
+
+primitive = ase.io.read("1MnI2-1.cif")
+
+
+#Define transformation matrix from primitive to magnetic cell
+P = np.array([
+    [2, 1, 0],
+    [-1, 1, 0],
+    [0, 0, 1]
+])
+
+supercell = make_supercell(primitive, P)
+
+
+m = 4.5
+magmoms = np.zeros((len(supercell), 3))
+
+
+A = primitive.cell[:2, :2] #extracts the 2D lattice vectors from the PRIMITIVE CELL. It is a 2x2 matrix.
+A_inv = np.linalg.inv(A.T) #Invert the above, constructs a mapping from cartesian to lattice coordinates. Transposed since AS>
+                            #This gives \vec{n}=A^{-1}\vec{r}, where r is cartesian position, n is coordinates in lattice bas>
+Q = np.array([1/3, 1/3])    #Defines the magnetic ordering vector in reciprocal lattice coordinates.
+
+for i, atom in enumerate(supercell):
+    if atom.symbol != 'Mn':
+        continue
+
+    r_cart = atom.position[:2] #extracts the cartesian position of the Mn atom
+    n = A_inv @ r_cart         # Converts to lattice coordinates \vec{r}=n_1a_1+n_2a_2
+
+    phase = 2 * np.pi * np.dot(-Q, n) #each lattice site gets a phase angle depending on its position (given via the lattice >
+    #NOTE minus Q above for clockwise
+
+    magmoms[i] = [                   #Assigns a planar spin spiral, note that m_0=(0,m,0) to get this.
+        -m * np.sin(phase),
+        m * np.cos(phase),
+        0.0
+    ]
+
+
+supercell.set_initial_magnetic_moments(magmoms)
+
+
+
+# --- 4. Setup GPAW Calculator ---
+# Article specifies: LDA functional, 600 eV cutoff.
+# Symmetry must be off for non-collinear spirals.
+# k-points: The magnetic BZ is smaller.
+# Let's use a dense grid to resolve the bands smoothly for Fig 1.
+calc = GPAW(
+    mode={'name':'pw',
+          'ecut':600},          # 600 eV cutoff in per paper. Rough first guess
+    xc='LDA',              # Paper explicitly uses LDA 
+    mixer={'backend': 'pulay',              #This was used to mimic https://gpaw.readthedocs.io/tutorialsexercises/magnetic/s>
+                       'beta': 0.05,
+                       'method': 'sum',
+                       'nmaxold': 5,
+                       'weight': 100},
+    kpts={'size':(12,12,1), 'gamma':True},	 # Adjusted for the rhombus supercell
+    symmetry='off',	   # Crucial for spiral
+    magmoms=magmoms,	   # Enforce non-collinear start
+    spinpol=True,          # Needed for non-collinear
+    occupations=FermiDirac(0.01),
+    txt='MnI2_spiral_supercell_attempt2.txt',
+    maxiter=100,
+    parallel={'domain':4,'kpt':4,'band':1} # Attempt at running in parallel for the compute node.
+)
+
+calc.verbosity=1
+
+supercell.calc = calc
+
+
+# --- 5. Run SCF Calculation ---
+print("Running SCF for magnetic supercell...")
+energy = supercell.get_potential_energy()
+calc.write('MnI2_spiral_gs_attempt2.gpw',mode='all')
+print('Finished SCF calculation, result saved in gpw file.')
+
+#Checking convergence and magnetic moments
+energy = supercell.get_potential_energy()
+print('energy=',energy) #check for divergence. If it diverges, something wrong in the setup
+print('')
+#Magmoms
+print('Local magnetic moments = ', calc.get_non_collinear_magnetic_moments())
+#We want three Mn moments, roughly 120 degrees apart, magnitude around 3-5 µB
+print('')
+#Total M
+print('Total magnetic moment=', supercell.get_magnetic_moment())
+#Should be 0. If they align ferromagnetically, phase may be incorrectly assigned
+
+# NOTE: Bandstructure calculation failed during run. Split that calculation into a separate file (bandstructure.py)
+#Should have fixed the bs calculation now, started run on DTU Gbar.
