@@ -6,8 +6,26 @@ from ase.visualize import view
 import ase
 from ase.build import make_supercell
 
+
+#NOTE this is before SOC!
+
+#Parameters that need updating for every material:
+#1) Primitive cell, use different cif input
+#2) Perhaps transformation matrix, depends on if magnetic supercell is the same (ensure same lattice and same Q
+#3) Magnetic moment on each of the magnetic atoms (m)
+
+#Parameters that should be checked for every run:
+#1) The PW cutoff
+#2) The k-point grid-size
+#3) The chosen parallelization in the calc object.
+
+#To do later:
+#1) Generalize the magnetic supercell calculation to a function that takes a lattice type (?), a Q vector, and a handedness (lefthanded vs righthanded spiral rotation) as input, and the output should then be the magnetic supercell.
+
+
 primitive = ase.io.read("1MnI2-1.cif")
 
+name = primitive.get_chemical_formula(mode='metal')
 
 #Define transformation matrix from primitive to magnetic cell
 P = np.array([
@@ -49,14 +67,13 @@ supercell.set_initial_magnetic_moments(magmoms)
 
 
 
-# --- 4. Setup GPAW Calculator ---
+# ---  Setup GPAW Calculator ---
 # Article specifies: LDA functional, 600 eV cutoff.
 # Symmetry must be off for non-collinear spirals.
 # k-points: The magnetic BZ is smaller.
-# Let's use a dense grid to resolve the bands smoothly for Fig 1.
 calc = GPAW(
     mode={'name':'pw',
-          'ecut':600},          # 600 eV cutoff in per paper. Rough first guess
+          'ecut':600},          # 600 eV cutoff in per paper. 
     xc='LDA',              # Paper explicitly uses LDA 
     mixer={'backend': 'pulay',              #This was used to mimic https://gpaw.readthedocs.io/tutorialsexercises/magnetic/s>
                        'beta': 0.05,
@@ -68,7 +85,7 @@ calc = GPAW(
     magmoms=magmoms,	   # Enforce non-collinear start
     spinpol=True,          # Needed for non-collinear
     occupations=FermiDirac(0.01),
-    txt='MnI2_spiral_supercell_attempt2.txt',
+    txt=name+'_SCF_GS.txt',
     maxiter=100,
     parallel={'domain':4,'kpt':4,'band':1} # Attempt at running in parallel for the compute node.
 )
@@ -81,7 +98,7 @@ supercell.calc = calc
 # --- 5. Run SCF Calculation ---
 print("Running SCF for magnetic supercell...")
 energy = supercell.get_potential_energy()
-calc.write('MnI2_spiral_gs_attempt2.gpw',mode='all')
+calc.write(name+'_SCF_GS.gpw',mode='all')
 print('Finished SCF calculation, result saved in gpw file.')
 
 #Checking convergence and magnetic moments
@@ -96,5 +113,3 @@ print('')
 print('Total magnetic moment=', supercell.get_magnetic_moment())
 #Should be 0. If they align ferromagnetically, phase may be incorrectly assigned
 
-# NOTE: Bandstructure calculation failed during run. Split that calculation into a separate file (bandstructure.py)
-#Should have fixed the bs calculation now, started run on DTU Gbar.
