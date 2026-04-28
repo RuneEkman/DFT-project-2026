@@ -184,8 +184,8 @@ if world.rank == 0:
     ax.set_title('Spin-resolved band structure', fontsize=13)
 
     plt.tight_layout()
-    plt.savefig('spin_bands.png', dpi=150)
-    plt.savefig('spin_bands.pdf')
+    plt.savefig(name+'spin_bands.png', dpi=150)
+    plt.savefig(name+'spin_bands.pdf')
 
     print("Done. Results saved to", name + f'_band_npoint{npoints}')
 
