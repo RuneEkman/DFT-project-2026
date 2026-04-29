@@ -27,6 +27,9 @@ primitive = ase.io.read("1MnI2-1.cif")
 
 name = primitive.get_chemical_formula(mode='metal')
 
+#Running for SOC:
+name += '_SOC_'
+
 #Define transformation matrix from primitive to magnetic cell
 P = np.array([
     [2, 1, 0],
@@ -87,7 +90,8 @@ calc = GPAW(
     occupations=FermiDirac(0.01),
     txt=name+'_SCF_GS.txt',
     maxiter=100,
-    parallel={'domain':4,'kpt':4,'band':1} # Attempt at running in parallel for the compute node.
+    parallel={'domain':4,'kpt':4,'band':1}, # Attempt at running in parallel for the compute node.
+    soc= True,
 )
 
 calc.verbosity=1

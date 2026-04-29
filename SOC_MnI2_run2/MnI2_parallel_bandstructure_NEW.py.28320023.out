@@ -1,0 +1,194 @@
+venv: /zhome/ae/1/229651/venv/bin/activate
+Calculating Band structure, path = [[-0.5  0.   0. ]
+ [ 0.   0.   0. ]
+ [ 0.5  0.   0. ]], npoints=100
+Calculating Band structure, path = [[-0.5  0.   0. ]
+ [ 0.   0.   0. ]
+ [ 0.5  0.   0. ]], npoints=100
+Calculating Band structure, path = [[-0.5  0.   0. ]
+ [ 0.   0.   0. ]
+ [ 0.5  0.   0. ]], npoints=100
+Calculating Band structure, path = [[-0.5  0.   0. ]
+ [ 0.   0.   0. ]
+ [ 0.5  0.   0. ]], npoints=100
+Calculating Band structure, path = [[-0.5  0.   0. ]
+ [ 0.   0.   0. ]
+ [ 0.5  0.   0. ]], npoints=100
+Calculating Band structure, path = [[-0.5  0.   0. ]
+ [ 0.   0.   0. ]
+ [ 0.5  0.   0. ]], npoints=100
+Calculating Band structure, path = [[-0.5  0.   0. ]
+ [ 0.   0.   0. ]
+ [ 0.5  0.   0. ]], npoints=100Calculating Band structure, path = [[-0.5  0.   0. ]
+ [ 0.   0.   0. ]
+ [ 0.5  0.   0. ]], npoints=100
+
+Calculating Band structure, path = [[-0.5  0.   0. ]
+ [ 0.   0.   0. ]
+ [ 0.5  0.   0. ]], npoints=100
+Calculating Band structure, path = [[-0.5  0.   0. ]
+ [ 0.   0.   0. ]
+ [ 0.5  0.   0. ]], npoints=100
+Calculating Band structure, path = [[-0.5  0.   0. ]
+ [ 0.   0.   0. ]
+ [ 0.5  0.   0. ]], npoints=100
+Calculating Band structure, path = [[-0.5  0.   0. ]
+ [ 0.   0.   0. ]
+ [ 0.5  0.   0. ]], npoints=100
+Calculating Band structure, path = [[-0.5  0.   0. ]
+ [ 0.   0.   0. ]
+ [ 0.5  0.   0. ]], npoints=100
+Calculating Band structure, path = [[-0.5  0.   0. ]
+ [ 0.   0.   0. ]
+ [ 0.5  0.   0. ]], npoints=100
+Calculating Band structure, path = [[-0.5  0.   0. ]
+ [ 0.   0.   0. ]
+ [ 0.5  0.   0. ]], npoints=100
+Calculating Band structure, path = [[-0.5  0.   0. ]
+ [ 0.   0.   0. ]
+ [ 0.5  0.   0. ]], npoints=100
+Bands done
+Results saved to Mn3I6_SOC__band_npoint100
+Bands done
+Results saved to Mn3I6_SOC__band_npoint100
+Bands done
+Results saved to Mn3I6_SOC__band_npoint100
+Bands done
+Results saved to Mn3I6_SOC__band_npoint100
+Bands done
+Results saved to Mn3I6_SOC__band_npoint100
+Bands done
+Results saved to Mn3I6_SOC__band_npoint100
+Bands done
+Results saved to Mn3I6_SOC__band_npoint100
+Bands done
+Results saved to Mn3I6_SOC__band_npoint100
+Bands done
+Results saved to Mn3I6_SOC__band_npoint100
+Bands done
+Results saved to Mn3I6_SOC__band_npoint100
+Bands done
+Results saved to Mn3I6_SOC__band_npoint100
+Bands done
+Results saved to Mn3I6_SOC__band_npoint100
+Bands done
+Results saved to Mn3I6_SOC__band_npoint100
+Bands done
+Results saved to Mn3I6_SOC__band_npoint100
+Bands done
+Results saved to Mn3I6_SOC__band_npoint100
+Bands done
+Results saved to Mn3I6_SOC__band_npoint100
+Now plotting.
+Calculating spin expectation value
+Now plotting.
+Calculating spin expectation value
+Now plotting.
+Calculating spin expectation value
+Now plotting.
+Calculating spin expectation value
+Now plotting.
+Calculating spin expectation value
+Now plotting.
+Calculating spin expectation value
+Now plotting.
+Calculating spin expectation value
+Now plotting.
+Calculating spin expectation value
+Now plotting.
+Now plotting.
+Calculating spin expectation value
+Calculating spin expectation value
+Now plotting.
+Now plotting.
+Calculating spin expectation value
+Now plotting.
+Calculating spin expectation value
+Now plotting.
+Calculating spin expectation value
+Now plotting.
+Calculating spin expectation value
+Now plotting.
+Calculating spin expectation value
+Calculating spin expectation value
+Calculating orbital decomposition
+Calculating orbital decomposition
+Calculating orbital decomposition
+Calculating orbital decomposition
+Calculating orbital decomposition
+Calculating orbital decomposition
+Calculating orbital decomposition
+Calculating orbital decomposition
+Calculating orbital decomposition
+Calculating orbital decomposition
+Calculating orbital decomposition
+Calculating orbital decomposition
+Calculating orbital decomposition
+Calculating orbital decomposition
+Calculating orbital decomposition
+Done. Results saved to Mn3I6_SOC__band_npoint100
+Calculating orbital decomposition
+Atom projectors:
+  Atom  0 (Mn): ['s', 's', 'p', 'p', 'd', 'd'] -> 6 projectors
+  Atom  1 (I): ['s', 'p', 's', 'p', 'd'] -> 5 projectors
+  Atom  2 (I): ['s', 'p', 's', 'p', 'd'] -> 5 projectors
+  Atom  3 (Mn): ['s', 's', 'p', 'p', 'd', 'd'] -> 6 projectors
+  Atom  4 (I): ['s', 'p', 's', 'p', 'd'] -> 5 projectors
+  Atom  5 (I): ['s', 'p', 's', 'p', 'd'] -> 5 projectors
+  Atom  6 (Mn): ['s', 's', 'p', 'p', 'd', 'd'] -> 6 projectors
+  Atom  7 (I): ['s', 'p', 's', 'p', 'd'] -> 5 projectors
+  Atom  8 (I): ['s', 'p', 's', 'p', 'd'] -> 5 projectors
+Orbital decomposition done.
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 28320023: <MnI2_parallel_bandstructure_NEW.py> in cluster <dcc> Done
+
+Job <MnI2_parallel_bandstructure_NEW.py> was submitted from host <n-62-30-4> by user <s260438> in cluster <dcc> at Tue Apr 28 20:26:21 2026
+Job was executed on host(s) <16*n-62-29-22>, in queue <hpc>, as user <s260438> in cluster <dcc> at Tue Apr 28 23:17:24 2026
+</zhome/ae/1/229651> was used as the home directory.
+</zhome/ae/1/229651/project_run_2> was used as the working directory.
+Started at Tue Apr 28 23:17:24 2026
+Terminated at Wed Apr 29 02:58:41 2026
+Results reported at Wed Apr 29 02:58:41 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash -l
+export MYQUEUE_TASK_ID=$LSB_JOBID
+mq=/zhome/ae/1/229651/.myqueue/lsf-$MYQUEUE_TASK_ID
+source /zhome/ae/1/229651/venv/bin/activate
+echo "venv: /zhome/ae/1/229651/venv/bin/activate"
+(touch $mq-0 && \
+ cd '/zhome/ae/1/229651/project_run_2' && \
+ mpiexec python3 MnI2_parallel_bandstructure_NEW.py && \
+ touch $mq-1) || \
+(touch $mq-2; exit 1)
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   205949.27 sec.
+    Max Memory :                                 30842 MB
+    Average Memory :                             29819.51 MB
+    Total Requested Memory :                     98304.00 MB
+    Delta Memory :                               67462.00 MB
+    Max Swap :                                   -
+    Max Processes :                              21
+    Max Threads :                                73
+    Run time :                                   13277 sec.
+    Turnaround time :                            23540 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file </zhome/ae/1/229651/project_run_2/MnI2_parallel_bandstructure_NEW.py.28320023.err> for stderr output of this job.
+
