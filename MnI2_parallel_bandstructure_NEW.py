@@ -135,10 +135,6 @@ def compute_spin_z(calc, e_kn, world):
     # MPI reduction: sum across all ranks
     world.sum(s_kn)
 
-    # Colormap anchors — set after reduction
-    s_kn[0, 0] =  1
-    s_kn[0, 1] = -1
-
     return s_kn
 
 
@@ -157,7 +153,8 @@ if world.rank == 0:
     fig, ax = plt.subplots(figsize=(6, 6))
 
     cmap = plt.cm.viridis
-    vmin, vmax = -1, 1
+    # vmin, vmax = -1, 1
+    vmin, vmax = np.min(s_kn) , np.max(s_kn)
 
     for n in range(e_kn.shape[1]):
         points   = np.array([x, e_kn[:, n]]).T.reshape(-1, 1, 2)
