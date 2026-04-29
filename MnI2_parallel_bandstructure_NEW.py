@@ -137,6 +137,82 @@ def compute_spin_z(calc, e_kn, world):
 
     return s_kn
 
+def compute_spin_n(calc, e_kn, world, n_vec):
+    """
+    Compute the spin expectation value <sigma_n> = n_hat dot <sigma>
+    for all k-points and bands, where n_hat is an arbitrary unit vector.
+
+    Parameters
+    ----------
+    calc   : GPAW calculator
+    e_kn   : array of eigenvalues (used only for shape)
+    world  : MPI communicator
+    n_vec  : array-like, shape (3,) — the spin projection direction.
+             Does NOT need to be pre-normalised.
+             Can be generated from spherical coordinates if you from spinspiral import generate_n_hat
+
+    Returns
+    -------
+    s_kn : array, shape (nk, nbands), real-valued expectation values.
+    """
+    # --- normalise direction vector ---
+    n_vec = np.asarray(n_vec, dtype=float)
+    norm = np.linalg.norm(n_vec)
+    if norm < 1e-10:
+        raise ValueError("n_vec must be a non-zero vector")
+    nx, ny, nz = n_vec / norm
+
+    # --- build n_hat dot sigma as a 2x2 complex matrix ---
+    # sigma_x = [[0,1],[1,0]], sigma_y = [[0,-i],[i,0]], sigma_z = [[1,0],[0,-1]]
+    # n.sigma = [[ nz,        nx - i*ny ],
+    #            [ nx + i*ny, -nz       ]]
+    sigma_n = np.array([[ nz,           nx - 1j*ny],
+                         [nx + 1j*ny,  -nz         ]], dtype=complex)
+
+    ucvol = np.abs(np.linalg.det(calc.dft.density.nt_sR.desc.cell))
+    dO_ii = {a: setup.dO_ii for a, setup in enumerate(calc.dft.setups)}
+
+    s_kn = np.zeros_like(e_kn)
+
+    for wfs in calc.dft.ibzwfs._wfs_u:
+        index = wfs.k
+
+        psit_nsG = wfs.psit_nX.data[:]   # shape: (nbands, 2, nG)
+        psit1_nG = psit_nsG[:, 0, :]     # spin-up   component
+        psit2_nG = psit_nsG[:, 1, :]     # spin-down component
+
+        # Smooth contribution: sum over G of psi† (n.sigma) psi
+        # = nz*(|psi1|^2 - |psi2|^2)
+        # + (nx-i*ny)*(psi1* psi2)
+        # + (nx+i*ny)*(psi2* psi1)
+        smooth = (
+            sigma_n[0, 0] * np.sum(psit1_nG.conj() * psit1_nG, axis=1)
+          + sigma_n[0, 1] * np.sum(psit1_nG.conj() * psit2_nG, axis=1)
+          + sigma_n[1, 0] * np.sum(psit2_nG.conj() * psit1_nG, axis=1)
+          + sigma_n[1, 1] * np.sum(psit2_nG.conj() * psit2_nG, axis=1)
+        ) * ucvol
+        s_kn[index] = smooth.real
+
+        # PAW augmentation correction
+        for a, P_nsi in wfs.P_ani.items():
+            P1_ni = P_nsi[:, 0, :]   # shape: (nbands, nprojs)
+            P2_ni = P_nsi[:, 1, :]
+
+            dO = dO_ii[a]
+
+            # Each term: sum_{i,j} P_s1*(i) dO_ij P_s2(j)
+            # = einsum('ni,nj,ij->n', P_s1.conj(), P_s2, dO)
+            s_kn[index] += (
+                sigma_n[0, 0] * np.einsum('ni,nj,ij->n', P1_ni.conj(), P1_ni, dO)
+              + sigma_n[0, 1] * np.einsum('ni,nj,ij->n', P1_ni.conj(), P2_ni, dO)
+              + sigma_n[1, 0] * np.einsum('ni,nj,ij->n', P2_ni.conj(), P1_ni, dO)
+              + sigma_n[1, 1] * np.einsum('ni,nj,ij->n', P2_ni.conj(), P2_ni, dO)
+            ).real
+
+    world.sum(s_kn)
+    return s_kn
+
+
 
 s_kn = compute_spin_z(calc, e_kn, world)
 
