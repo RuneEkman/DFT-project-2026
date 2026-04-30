@@ -15,7 +15,7 @@ def cif_reader(path, transform = None):
     name = primitive.get_chemical_formula(mode='metal')
 
     #Define transformation matrix from primitive to magnetic cell
-    if transform == None:
+    if transform is None:
         P = np.array([
             [2, 1, 0],
             [-1, 1, 0],
