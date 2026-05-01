@@ -76,7 +76,7 @@ calc = GPAW(
     txt=name+'_SCF_GS.txt',
     maxiter=100,
     parallel={'domain':4,'kpt':4,'band':1}, # Attempt at running in parallel for the compute node.
-    soc= True,
+    soc= False,
 )
 
 calc.verbosity=1
