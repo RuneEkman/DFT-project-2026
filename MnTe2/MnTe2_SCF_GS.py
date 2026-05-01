@@ -13,7 +13,6 @@ sys.path.append(str(Path().resolve().parent))
 # Now import
 from spinspiral import construct_full
 
-
 #NOTE this is before SOC!
 
 #Parameters that need updating for every material:
@@ -30,13 +29,15 @@ from spinspiral import construct_full
 #1) Generalize the magnetic supercell calculation to a function that takes a lattice type (?), a Q vector, and a handedness (lefthanded vs righthanded spiral rotation) as input, and the output should then be the magnetic supercell.
 
 #Normal vector orientation in spherical
-theta, phi = 90,0
+theta, phi = 0,0
 
-path_to_cif = "1MnI2-1.cif"
+path_to_cif = "1MnTe2-2.cif"
 
 Q = [1/3,1/3,0]
 
-magnetic_magnitude = 4.5
+magnetic_magnitude = 2.8 #Start value based on https://c2db.fysik.dtu.dk/material/1MnTe2-2
+
+init_moment=[0,magnetic_magnitude,0]
 
 #Define transformation matrix from primitive to magnetic cell
 P = np.array([
@@ -47,12 +48,12 @@ P = np.array([
 
 magnetic_atom = 'Mn'
 
-supercell , name = construct_full(theta = theta, phi=phi, Q=Q , path= path_to_cif, transform=P, magnitude=magnetic_magnitude, magsymbols=magnetic_atom, init_moment=[0,4.5,0])
-#Note: init_moment is specified to mimic the article by TO.
+supercell , name = construct_full(theta = theta, phi=phi, Q=Q , path= path_to_cif, transform=P, magnitude=magnetic_magnitude, magsymbols=magnetic_atom, init_moment=init_moment)
 
 name += '_spinz_'
 
 magmoms = supercell.arrays['initial_magmoms']
+
 
 # ---  Setup GPAW Calculator ---
 # Article specifies: LDA functional, 600 eV cutoff.

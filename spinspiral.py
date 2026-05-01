@@ -116,7 +116,7 @@ def make_m0_plane(n_hat, magnitude=4.5):
 
 
 
-def construct_full(theta,phi,path,Q,magnitude,transform=None,magsymbols='Mn'):
+def construct_full(theta,phi,path,Q,magnitude,transform=None,magsymbols='Mn', init_moment = None):
     """
     Provide:
     theta: polar angle of normal vector
@@ -128,7 +128,12 @@ def construct_full(theta,phi,path,Q,magnitude,transform=None,magsymbols='Mn'):
     magsymbols: symbols of magnetic atoms. Defaults to Mn if nothing provided.
     """
     n = generate_n_hat(theta,phi)
-    m0 = make_m0_plane(n_hat=n, magnitude=magnitude)
+    if init_moment is None:
+        m0 = make_m0_plane(n_hat=n, magnitude=magnitude)
+    else:
+        m0 = np.asarray(init_moment, dtype = float)
+        if m0.shape !=(3,):
+            raise ValueError ('Init_moment incorrect shape, must be [x,y,z]')
 
     primitive, supercell, name = cif_reader(path,transform)
 
