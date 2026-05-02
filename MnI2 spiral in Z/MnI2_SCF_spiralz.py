@@ -14,20 +14,18 @@ sys.path.append(str(Path().resolve().parent))
 from spinspiral import construct_full
 
 
-#NOTE this is before SOC!
-
-#Parameters that need updating for every material:
-#1) Primitive cell, use different cif input
-#2) Perhaps transformation matrix, depends on if magnetic supercell is the same (ensure same lattice and same Q
-#3) Magnetic moment on each of the magnetic atoms (m)
+#NOTE this is WITH SOC!
+#NOTE I have added tightened convergence criteria!
 
 #Parameters that should be checked for every run:
 #1) The PW cutoff
 #2) The k-point grid-size
 #3) The chosen parallelization in the calc object.
 
-#To do later:
-#1) Generalize the magnetic supercell calculation to a function that takes a lattice type (?), a Q vector, and a handedness (lefthanded vs righthanded spiral rotation) as input, and the output should then be the magnetic supercell.
+
+#4) The damn init moment!
+
+#5) The convergence criteria!
 
 #Normal vector orientation in spherical
 theta, phi = 90,0
@@ -47,10 +45,11 @@ P = np.array([
 
 magnetic_atom = 'Mn'
 
-supercell , name = construct_full(theta = theta, phi=phi, Q=Q , path= path_to_cif, transform=P, magnitude=magnetic_magnitude, magsymbols=magnetic_atom, init_moment=[0,4.5,0])
-#Note: init_moment is specified to mimic the article by TO.
+supercell , name = construct_full(theta = theta, phi=phi, Q=Q , path= path_to_cif, transform=P, magnitude=magnetic_magnitude, magsymbols=magnetic_atom)#
+#, init_moment=[0,4.5,0])
+#Note: init_moment can be specified to mimic the article by TO.
 
-name += '_spinz_'
+name += '_SOC_spinz_'
 
 magmoms = supercell.arrays['initial_magmoms']
 
@@ -73,9 +72,10 @@ calc = GPAW(
     spinpol=True,          # Needed for non-collinear
     occupations=FermiDirac(0.01),
     txt=name+'_SCF_GS.txt',
-    maxiter=100,
+    maxiter=200,
     parallel={'domain':4,'kpt':4,'band':1}, # Attempt at running in parallel for the compute node.
-    soc= False,
+    soc= True,
+    convergence={'density': 1e-9, 'energy': 5e-7, 'eigenstates': 1e-10}  # Tightened criteria
 )
 
 calc.verbosity=1

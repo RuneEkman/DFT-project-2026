@@ -91,7 +91,12 @@ def create_spin_spiral(atoms, primitive, Q, m0, n_hat, magnetic_symbols=None):
 
 
 def generate_n_hat(theta=0, phi=0):
-    """Find cartesian normal vector from spherical angles"""
+    """Find cartesian normal vector from spherical angles
+    PROVIDE ANGLES IN DEGREES.
+    """
+    theta = np.deg2rad(theta)
+    phi = np.deg2rad(phi)
+
     x = np.cos(phi)*np.sin(theta)
     y = np.sin(phi)*np.sin(theta)
     z = np.cos(theta)
@@ -119,8 +124,8 @@ def make_m0_plane(n_hat, magnitude=4.5):
 def construct_full(theta,phi,path,Q,magnitude,transform=None,magsymbols='Mn', init_moment = None):
     """
     Provide:
-    theta: polar angle of normal vector
-    phi: azimuthal angle of normal vector
+    theta: polar angle of normal vector in deg
+    phi: azimuthal angle of normal vector in deg
     Q: magnetic ordering vector, e.g. [1/3,1/3,0]
     magnitude: size of magnetic moment
     path: path to cif file
