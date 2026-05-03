@@ -44,7 +44,7 @@ P = np.array([
     [0, 0, 1]
 ])
 
-magnetic_atom = 'Mn'
+magnetic_atom = 'V'
 
 supercell , name = construct_full(theta = theta, phi=phi, Q=Q , path= path_to_cif, transform=P, magnitude=magnetic_magnitude, magsymbols=magnetic_atom)
 #
@@ -77,7 +77,7 @@ calc = GPAW(
     maxiter=200,
     parallel={'domain':4,'kpt':4,'band':1}, # Attempt at running in parallel for the compute node.
     soc= False,
-    convergence={'density': 1e-9, 'energy': 5e-7, 'eigenstates': 1e-10}  # Tightened criteria
+    #convergence={'density': 1e-9, 'energy': 5e-7, 'eigenstates': 1e-10}  # Tightened criteria
 )
 
 calc.verbosity=1
