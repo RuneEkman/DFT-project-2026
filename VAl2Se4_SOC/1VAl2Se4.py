@@ -15,11 +15,8 @@ sys.path.append(str(Path().resolve().parent))
 from spinspiral import construct_full
 
 
-#NOTE this is WITHOUT SOC!
-#NOTE I have loosened the mixer, as the original run had trouble converging.
-#NOTE that I also ran it for a coarse grid, just to restart and run for a finer grid.
-
-
+#NOTE this is WITH SOC!
+#NOTE I have RETIGHTENED the mixer.
 
 
 #Normal vector orientation in spherical
@@ -29,7 +26,7 @@ path_to_cif = "1VAl2Se4-1.cif"
 
 Q = [1/3,1/3,0]
 
-magnetic_magnitude = 4.5
+magnetic_magnitude = 2.4
 
 #Define transformation matrix from primitive to magnetic cell
 P = np.array([
@@ -45,7 +42,7 @@ supercell , name = construct_full(theta = theta, phi=phi, Q=Q , path= path_to_ci
 #, init_moment=[0,4.5,0])
 #Note: init_moment can be specified to mimic the article by TO.
 
-# name += '_SOC_'
+name += '_SOC_'
 
 magmoms = supercell.arrays['initial_magmoms']
 
@@ -58,11 +55,11 @@ calc = GPAW(
           'ecut':600},          # 600 eV cutoff in per paper. 
     xc='LDA',              # Paper explicitly uses LDA 
     mixer={'backend': 'pulay',              #This was used to mimic https://gpaw.readthedocs.io/tutorialsexercises/magnetic/s>
-                       'beta': 0.10,
+                       'beta': 0.05,
                        'method': 'sum',
                        'nmaxold': 5,
-                       'weight': 50},
-    kpts={'size':(6,6,1), 'gamma':True},	 # Adjusted for the rhombus supercell
+                       'weight': 100},
+    kpts={'size':(12,12,1), 'gamma':True},	 # Adjusted for the rhombus supercell
     symmetry='off',	   # Crucial for spiral
     magmoms=magmoms,	   # Enforce non-collinear start
     spinpol=True,          # Needed for non-collinear
@@ -70,7 +67,7 @@ calc = GPAW(
     txt=name+'_SCF_GS.txt',
     maxiter=200,
     parallel={'domain':4,'kpt':4,'band':1}, # Attempt at running in parallel for the compute node.
-    soc= False,
+    soc= True,
     #convergence={'density': 1e-9, 'energy': 5e-7, 'eigenstates': 1e-10}  # Tightened criteria
 )
 
@@ -107,26 +104,26 @@ parprint('Total magnetic moment=', supercell.get_magnetic_moment())
 #Should be 0. If they align ferromagnetically, phase may be incorrectly assigned
 
 
-parprint('Now restarting on finer grid')
+# parprint('Now restarting on finer grid')
 
 
-calc = GPAW('coarse_converged.gpw')
-atoms = calc.get_atoms()
+# calc = GPAW('coarse_converged.gpw')
+# atoms = calc.get_atoms()
 
-calc.set(
-    kpts={'size': (12,12,1), 'gamma': True},
-    mixer={'backend': 'pulay',              #This was used to mimic https://gpaw.readthedocs.io/tutorialsexercises/magnetic/s>
-                       'beta': 0.10,
-                       'method': 'sum',
-                       'nmaxold': 5,
-                       'weight': 50},
-    txt=name+'_fine_SCF_GS.txt'
-)
+# calc.set(
+#     kpts={'size': (12,12,1), 'gamma': True},
+#     mixer={'backend': 'pulay',              #This was used to mimic https://gpaw.readthedocs.io/tutorialsexercises/magnetic/s>
+#                        'beta': 0.10,
+#                        'method': 'sum',
+#                        'nmaxold': 5,
+#                        'weight': 50},
+#     txt=name+'_fine_SCF_GS.txt'
+# )
 
-atoms.calc = calc
-atoms.get_potential_energy()
+# atoms.calc = calc
+# atoms.get_potential_energy()
 
 
-calc.write(name+'_fine_SCF_GS.gpw')
+# calc.write(name+'_fine_SCF_GS.gpw')
 
-parprint('Fine grid SCF finished.')
+# parprint('Fine grid SCF finished.')

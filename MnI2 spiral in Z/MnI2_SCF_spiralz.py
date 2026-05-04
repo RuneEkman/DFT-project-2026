@@ -75,7 +75,7 @@ calc = GPAW(
     maxiter=200,
     parallel={'domain':4,'kpt':4,'band':1}, # Attempt at running in parallel for the compute node.
     soc= True,
-    convergence={'density': 1e-9, 'energy': 5e-7, 'eigenstates': 1e-10}  # Tightened criteria
+    #convergence={'density': 1e-9, 'energy': 5e-7, 'eigenstates': 1e-10}  # Tightened criteria
 )
 
 calc.verbosity=1
