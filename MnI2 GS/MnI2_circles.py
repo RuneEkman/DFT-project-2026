@@ -3,10 +3,16 @@ from gpaw.occupations import create_occ_calc
 from gpaw.spinorbit import soc_eigenstates  
 import numpy as np
 
+# Add the parent directory to the path
+from pathlib import Path
+import sys
+sys.path.append(str(Path().resolve().parent))
+
+
 from circleplots import sphere_points_lower
 
 theta_tp, phi_tp = sphere_points_lower(distance=5)                                                                            
-calc = GPAW('../MnI2_SCF_GS.gpw')                                                                                             
+calc = GPAW('MnI2_SCF_GS.gpw')                                                                                             
 occcalc = create_occ_calc({'name': 'fermi-dirac', 'width': 0.001})                                                      
 soc_tp = np.array([])                                                                                                   
 for theta, phi in zip(theta_tp, phi_tp):                                                                                
