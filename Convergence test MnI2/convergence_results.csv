@@ -158,3 +158,7 @@ econv,ecut_700eV,4x4x1,700,-45.428135,-5.047571,0.0,4.193|4.193|4.193,True,
 econv,ecut_700eV,4x4x1,700,-45.428135,-5.047571,0.0,4.193|4.193|4.193,True,
 econv,ecut_700eV,4x4x1,700,-45.428135,-5.047571,0.0,4.193|4.193|4.193,True,
 econv,ecut_700eV,4x4x1,700,-45.428135,-5.047571,0.0,4.193|4.193|4.193,True,
+kconv,kconv_4x4x1,4x4x1,300,,,,,False,FAILED: Cannot parallelize as the communicator size 1 is not divisible by the requested number 4 of ranks for k-point paralleliz
+kconv,kconv_8x8x1,8x8x1,300,,,,,False,FAILED: Cannot parallelize as the communicator size 1 is not divisible by the requested number 4 of ranks for k-point paralleliz
+kconv,kconv_10x10x1,10x10x1,300,,,,,False,FAILED: Cannot parallelize as the communicator size 1 is not divisible by the requested number 4 of ranks for k-point paralleliz
+kconv,kconv_12x12x1,12x12x1,300,,,,,False,FAILED: Cannot parallelize as the communicator size 1 is not divisible by the requested number 4 of ranks for k-point paralleliz
