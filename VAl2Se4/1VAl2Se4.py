@@ -29,14 +29,13 @@ magnetic_magnitude = 2.3
 #Define transformation matrix from primitive to magnetic cell
 P = np.array([
     [2, 1, 0],
-    [-1, 1, 0],
+   [-1, 1, 0],
     [0, 0, 1]
 ])
 
 magnetic_atom = 'V'
 
 supercell , name = construct_full(theta = theta, phi=phi, Q=Q , path= path_to_cif, transform=P, magnitude=magnetic_magnitude, magsymbols=magnetic_atom)
-#
 #, init_moment=[0,4.5,0])
 #Note: init_moment can be specified to mimic the article by TO.
 
@@ -50,9 +49,9 @@ magmoms = supercell.arrays['initial_magmoms']
 # k-points: The magnetic BZ is smaller.
 calc = GPAW(
     mode={'name':'pw',
-          'ecut':600},          # 600 eV cutoff in per paper. 
-    xc='LDA',              # Paper explicitly uses LDA 
-    mixer={'backend': 'pulay',              #This was used to mimic https://gpaw.readthedocs.io/tutorialsexercises/magnetic/s>
+          'ecut':600},          # 600 eV cutoff in per paper.
+             xc='LDA',              # Paper explicitly uses LDA
+    mixer={'backend': 'pulay',              #This was used to mimic https://gpaw.readthedocs.io/tutorialsexercises/ma>
                       'beta': 0.05,
                       'method': 'sum',
                       'nmaxold': 5,
@@ -82,6 +81,7 @@ energy = supercell.get_potential_energy()
 calc.write(name+'_SCF_GS.gpw')#,mode='all')
 parprint('Finished SCF calculation, result saved in gpw file.')
 
+
 #Checking convergence and magnetic moments
 energy = supercell.get_potential_energy()
 parprint('energy=',energy) #check for divergence. If it diverges, something wrong in the setup
@@ -93,4 +93,3 @@ parprint('')
 #Total M
 parprint('Total magnetic moment=', supercell.get_magnetic_moment())
 #Should be 0. If they align ferromagnetically, phase may be incorrectly assigned
-
