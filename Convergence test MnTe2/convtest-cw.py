@@ -27,7 +27,7 @@ sys.path.append(str(Path().resolve().parent))
 from spinspiral import construct_full
 
 # ==============================================================================
-# MnI2 Convergence Test — k-points and PW cutoff
+# MnTe2 Convergence Test (CW) — k-points and PW cutoff
 #
 # Strategy:
 #   Phase 1: Converge k-points at a low fixed cutoff (KCONV_ECUT).
@@ -37,6 +37,20 @@ from spinspiral import construct_full
 # Convergence criteria are loosened relative to production to keep runs fast.
 # Results are appended to a CSV after each calculation so nothing is lost
 # if the job is killed mid-run.
+#
+# Parallelisation note:
+#   symmetry='off' means no k-point reduction by symmetry, so the IBZ equals
+#   the full Monkhorst-Pack grid. An N×N×1 grid has N² k-points. With kpt > 1
+#   in PARALLEL, GPAW's LCAO initialiser (used to seed the PW calculation)
+#   distributes those k-points across kpt MPI ranks, and its overlap evaluator
+#   asserts that each rank holds exactly 1 k-point at a time. That assertion
+#   fires whenever nkpts_per_rank = (N² / kpt_parallel) > 1, i.e. for all grids
+#   except the degenerate case where nkpts == kpt_parallel exactly.
+#
+#   The fix is to make kpt_parallel adaptive: use min(N_CORES, nkpts) so each
+#   kpt rank always owns exactly 1 k-point, and give all remaining cores to
+#   domain parallelism. N_CORES must match the -n / -R argument of your job
+#   submission script.
 # ==============================================================================
 
 # --- Shared structure parameters (keep identical to production run) ----------
@@ -63,20 +77,21 @@ K_GRIDS     = [
     (12, 12, 1),
 ]
 
-# Phase 2: ecut-convergence — use a cheap fixed k-grid 
+# Phase 2: ecut-convergence — use a cheap fixed k-grid
 # (ecut convergence is independent of k-sampling; a coarse grid is fine here)
-ECUT_KGRID  = (4, 4, 1)    # deliberately cheap 
+ECUT_KGRID  = (4, 4, 1)    # deliberately cheap
 ECUT_VALUES = [300, 400, 500, 600, 700]   # eV
 
 # Loosened SCF convergence for test runs (production uses 1e-9 / 1e-10)
 TEST_CONVERGENCE = {'density': 0.0005, 'energy': 0.0001, 'eigenstates': 4e-8}
 TEST_MAXITER     = 200
 
-# Parallelisation 
-PARALLEL = {'domain': 4, 'kpt': 4, 'band': 1}
+# Total MPI ranks — must match the core count in your job submission script.
+# kpt parallelism is derived automatically per k-grid (see make_parallel below).
+N_CORES = 16
 
 # Output CSV
-CSV_FILE = "convergence_results.csv"
+CSV_FILE = "convergence_results_cw.csv"
 CSV_HEADER = [
     "phase", "label",
     "kgrid", "ecut_eV",
@@ -88,6 +103,23 @@ CSV_HEADER = [
 ]
 
 # ==============================================================================
+
+def make_parallel(kgrid):
+    """Return a PARALLEL dict that is safe for the given kgrid.
+
+    With symmetry='off' the IBZ equals the full grid: nkpts = kx * ky * kz.
+    GPAW's LCAO overlap evaluator asserts that every kpt-parallel rank owns
+    exactly 1 k-point, so kpt_parallel must equal nkpts (one rank per k-point)
+    or 1 (no k-point parallelism).  We use min(N_CORES, nkpts) so that:
+      - small grids (e.g. 1×1×1 → 1 k-point) run with kpt=1, domain=N_CORES
+      - larger grids get as many kpt ranks as there are k-points, up to N_CORES
+    The remaining factor goes to domain decomposition (band=1 throughout).
+    """
+    nkpts = kgrid[0] * kgrid[1] * kgrid[2]
+    kpt_parallel = min(N_CORES, nkpts)
+    domain_parallel = N_CORES // kpt_parallel
+    return {'domain': domain_parallel, 'kpt': kpt_parallel, 'band': 1}
+
 
 def build_supercell():
     """Fresh supercell + magmoms for every calculator.
@@ -108,6 +140,8 @@ def build_supercell():
 
 
 def make_calc(ecut, kgrid, txt_name, magmoms):
+    parallel = make_parallel(kgrid)
+    parprint(f"  [cw] parallel layout: {parallel}")
     return GPAW(
         mode={'name': 'pw', 'ecut': ecut},
         xc='LDA',
@@ -125,7 +159,7 @@ def make_calc(ecut, kgrid, txt_name, magmoms):
         occupations=FermiDirac(0.01),
         txt=txt_name,
         maxiter=TEST_MAXITER,
-        parallel=PARALLEL,
+        parallel=parallel,
         soc=False,
         convergence=TEST_CONVERGENCE,
     )
@@ -150,11 +184,11 @@ def append_csv(row: dict):
 
 def run_single(phase, label, ecut, kgrid):
     """Run one SCF, collect results, append to CSV. Returns energy/atom."""
-    parprint(f"\n{'='*60}") #To separate outputs
-    parprint(f"  {phase} | {label} | ecut={ecut} eV | kgrid={kgrid}") #output
-    parprint(f"{'='*60}") #to separate output
+    parprint(f"\n{'='*60}")
+    parprint(f"  [cw] {phase} | {label} | ecut={ecut} eV | kgrid={kgrid}")
+    parprint(f"{'='*60}")
 
-    txt_name = f"conv_{label}.txt"
+    txt_name = f"conv_cw_{label}.txt"
     row = {
         "phase": phase, "label": label,
         "kgrid": 'x'.join(map(str, kgrid)),
@@ -185,13 +219,13 @@ def run_single(phase, label, ecut, kgrid):
         row["mn_moment_magnitudes"] = '|'.join(f'{m:.3f}' for m in mn_mags)
         row["scf_converged"]      = True
 
-        parprint(f"  Energy/atom : {energy/n_atoms:.6f} eV")
-        parprint(f"  Total magmom: {tot_mom:.4f} µB  (should be  around 0)")
-        parprint(f"  Mn |m|      : {mn_mags}  (should be around 4.5 µB each)")
+        parprint(f"  [cw] Energy/atom : {energy/n_atoms:.6f} eV")
+        parprint(f"  [cw] Total magmom: {tot_mom:.4f} µB  (should be around 0)")
+        parprint(f"  [cw] Mn |m|      : {mn_mags}  (should be around 4.5 µB each)")
 
     except Exception as e:
         row["notes"] = f"FAILED: {str(e)[:120]}"
-        parprint(f"  !! Run failed: {e}")
+        parprint(f"  [cw] !! Run failed: {e}")
         traceback.print_exc()
 
     append_csv(row)
@@ -202,7 +236,7 @@ def run_single(phase, label, ecut, kgrid):
 # Phase 1 — k-point convergence
 # ==============================================================================
 parprint("\n" + "#"*60)
-parprint("  PHASE 1: k-point convergence  (ecut = {} eV)".format(KCONV_ECUT))
+parprint("  [cw] PHASE 1: k-point convergence  (ecut = {} eV)".format(KCONV_ECUT))
 parprint("#"*60)
 
 kconv_results = []
@@ -212,13 +246,16 @@ for kgrid in K_GRIDS:
     kconv_results.append(row)
 
 # parprint a quick energy-difference table to guide choice of ECUT_KGRID
-parprint("\n--- Phase 1 summary ---")
+parprint("\n[cw] --- Phase 1 summary ---")
 parprint(f"{'kgrid':<14} {'E/atom (eV)':<18} {'ΔE/atom (meV)':<16} {'Mn |m| (µB)'}")
 prev_e = None
 for r in kconv_results:
     e = r["energy_per_atom_eV"]
-    delta = (e - prev_e) * 1000 if prev_e is not None else 0.0
-    parprint(f"  {r['kgrid']:<12} {e:<18} {delta:<16.2f} {r['mn_moment_magnitudes']}")
+    delta = (e - prev_e) * 1000 if prev_e is not None and e is not None else 0.0
+    if e is not None:
+        parprint(f"  {r['kgrid']:<12} {e:<18} {delta:<16.2f} {r['mn_moment_magnitudes']}")
+    else:
+        parprint(f"  {r['kgrid']:<12} FAILED")
     prev_e = e
 
 
@@ -226,8 +263,8 @@ for r in kconv_results:
 # Phase 2 — PW cutoff convergence
 # ==============================================================================
 parprint("\n" + "#"*60)
-parprint(f"Currently using ECUT_KGRID = {ECUT_KGRID} for Phase 2.")
-parprint("  PHASE 2: PW cutoff convergence  (kgrid = {}x{}x{})".format(*ECUT_KGRID))
+parprint(f"[cw] Currently using ECUT_KGRID = {ECUT_KGRID} for Phase 2.")
+parprint("  [cw] PHASE 2: PW cutoff convergence  (kgrid = {}x{}x{})".format(*ECUT_KGRID))
 parprint("#"*60)
 
 ecut_results = []
@@ -236,14 +273,17 @@ for ecut in ECUT_VALUES:
     row = run_single("econv", label, ecut, ECUT_KGRID)
     ecut_results.append(row)
 
-parprint("\n--- Phase 2 summary ---")
+parprint("\n[cw] --- Phase 2 summary ---")
 parprint(f"{'ecut (eV)':<12} {'E/atom (eV)':<18} {'ΔE/atom (meV)':<16} {'Mn |m| (µB)'}")
 prev_e = None
 for r in ecut_results:
     e = r["energy_per_atom_eV"]
-    delta = (e - prev_e) * 1000 if prev_e is not None else 0.0
-    parprint(f"  {r['ecut_eV']:<12} {e:<18} {delta:<16.2f} {r['mn_moment_magnitudes']}")
+    delta = (e - prev_e) * 1000 if prev_e is not None and e is not None else 0.0
+    if e is not None:
+        parprint(f"  {r['ecut_eV']:<12} {e:<18} {delta:<16.2f} {r['mn_moment_magnitudes']}")
+    else:
+        parprint(f"  {r['ecut_eV']:<12} FAILED")
     prev_e = e
 
-parprint(f"\nAll results written to: {CSV_FILE}")
-parprint("Done.")
+parprint(f"\n[cw] All results written to: {CSV_FILE}")
+parprint("[cw] Done.")
