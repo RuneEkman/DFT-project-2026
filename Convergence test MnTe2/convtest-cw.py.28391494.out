@@ -1,0 +1,482 @@
+venv: /zhome/ae/1/229651/venv/bin/activate
+
+############################################################
+  [cw] PHASE 1: k-point convergence  (ecut = 300 eV)
+############################################################
+
+============================================================
+  [cw] kconv | kconv_1x1x1 | ecut=300 eV | kgrid=(1, 1, 1)
+============================================================
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+  [cw] parallel layout: {'domain': 16, 'kpt': 1, 'band': 1}
+  [cw] Energy/atom : -6.427733 eV
+  [cw] Total magmom: 2.8236 µB  (should be around 0)
+  [cw] Mn |m|      : [np.float64(2.104205562952151), np.float64(2.1083778713566246), np.float64(2.1181919115166363)]  (should be around 4.5 µB each)
+
+============================================================
+  [cw] kconv | kconv_4x4x1 | ecut=300 eV | kgrid=(4, 4, 1)
+============================================================
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+  [cw] parallel layout: {'domain': 1, 'kpt': 16, 'band': 1}
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+  [cw] Energy/atom : -6.124075 eV
+  [cw] Total magmom: 0.0001 µB  (should be around 0)
+  [cw] Mn |m|      : [np.float64(2.6101716910781967), np.float64(2.6101830793624727), np.float64(2.6101830038060974)]  (should be around 4.5 µB each)
+
+============================================================
+  [cw] kconv | kconv_8x8x1 | ecut=300 eV | kgrid=(8, 8, 1)
+============================================================
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+  [cw] parallel layout: {'domain': 1, 'kpt': 16, 'band': 1}
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+  [cw] Energy/atom : -6.123954 eV
+  [cw] Total magmom: 0.0000 µB  (should be around 0)
+  [cw] Mn |m|      : [np.float64(2.583666942608061), np.float64(2.5836715564935058), np.float64(2.5836718920832267)]  (should be around 4.5 µB each)
+
+============================================================
+  [cw] kconv | kconv_10x10x1 | ecut=300 eV | kgrid=(10, 10, 1)
+============================================================
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+  [cw] parallel layout: {'domain': 1, 'kpt': 16, 'band': 1}
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+  [cw] Energy/atom : -6.123858 eV
+  [cw] Total magmom: 0.0000 µB  (should be around 0)
+  [cw] Mn |m|      : [np.float64(2.582345130037848), np.float64(2.5823237161204173), np.float64(2.582323702867964)]  (should be around 4.5 µB each)
+
+============================================================
+  [cw] kconv | kconv_12x12x1 | ecut=300 eV | kgrid=(12, 12, 1)
+============================================================
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+  [cw] parallel layout: {'domain': 1, 'kpt': 16, 'band': 1}
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+  [cw] Energy/atom : -6.123849 eV
+  [cw] Total magmom: 0.0000 µB  (should be around 0)
+  [cw] Mn |m|      : [np.float64(2.5834005999590377), np.float64(2.5834105603227635), np.float64(2.5834093825612277)]  (should be around 4.5 µB each)
+
+[cw] --- Phase 1 summary ---
+kgrid          E/atom (eV)        ΔE/atom (meV)    Mn |m| (µB)
+  1x1x1        -6.427733          0.00             2.104|2.108|2.118
+  4x4x1        -6.124075          303.66           2.610|2.610|2.610
+  8x8x1        -6.123954          0.12             2.584|2.584|2.584
+  10x10x1      -6.123858          0.10             2.582|2.582|2.582
+  12x12x1      -6.123849          0.01             2.583|2.583|2.583
+
+############################################################
+[cw] Currently using ECUT_KGRID = (4, 4, 1) for Phase 2.
+  [cw] PHASE 2: PW cutoff convergence  (kgrid = 4x4x1)
+############################################################
+
+============================================================
+  [cw] econv | ecut_300eV | ecut=300 eV | kgrid=(4, 4, 1)
+============================================================
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+  [cw] parallel layout: {'domain': 1, 'kpt': 16, 'band': 1}
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+  [cw] Energy/atom : -6.124075 eV
+  [cw] Total magmom: 0.0001 µB  (should be around 0)
+  [cw] Mn |m|      : [np.float64(2.6101716910781967), np.float64(2.6101830793624727), np.float64(2.6101830038060974)]  (should be around 4.5 µB each)
+
+============================================================
+  [cw] econv | ecut_400eV | ecut=400 eV | kgrid=(4, 4, 1)
+============================================================
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+  [cw] parallel layout: {'domain': 1, 'kpt': 16, 'band': 1}
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+  [cw] Energy/atom : -6.165597 eV
+  [cw] Total magmom: -0.0000 µB  (should be around 0)
+  [cw] Mn |m|      : [np.float64(2.6226523203991583), np.float64(2.622642662749958), np.float64(2.622637551394635)]  (should be around 4.5 µB each)
+
+============================================================
+  [cw] econv | ecut_500eV | ecut=500 eV | kgrid=(4, 4, 1)
+============================================================
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+  [cw] parallel layout: {'domain': 1, 'kpt': 16, 'band': 1}
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+  [cw] Energy/atom : -6.176635 eV
+  [cw] Total magmom: -0.0000 µB  (should be around 0)
+  [cw] Mn |m|      : [np.float64(2.62625103664802), np.float64(2.626250258546214), np.float64(2.626250258545909)]  (should be around 4.5 µB each)
+
+============================================================
+  [cw] econv | ecut_600eV | ecut=600 eV | kgrid=(4, 4, 1)
+============================================================
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+  [cw] parallel layout: {'domain': 1, 'kpt': 16, 'band': 1}
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+  [cw] Energy/atom : -6.178438 eV
+  [cw] Total magmom: 0.0000 µB  (should be around 0)
+  [cw] Mn |m|      : [np.float64(2.6253506479691255), np.float64(2.625341439741898), np.float64(2.62533627232109)]  (should be around 4.5 µB each)
+
+============================================================
+  [cw] econv | ecut_700eV | ecut=700 eV | kgrid=(4, 4, 1)
+============================================================
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+n_hat = [0. 0. 1.]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+Initial moment= [0.  2.8 0. ]
+  [cw] parallel layout: {'domain': 1, 'kpt': 16, 'band': 1}
+  [cw] Energy/atom : -6.178668 eV
+  [cw] Total magmom: -0.0000 µB  (should be around 0)
+  [cw] Mn |m|      : [np.float64(2.626846670191589), np.float64(2.6268633644894273), np.float64(2.6268633644903345)]  (should be around 4.5 µB each)
+
+[cw] --- Phase 2 summary ---
+ecut (eV)    E/atom (eV)        ΔE/atom (meV)    Mn |m| (µB)
+  300          -6.124075          0.00             2.610|2.610|2.610
+  400          -6.165597          -41.52           2.623|2.623|2.623
+  500          -6.176635          -11.04           2.626|2.626|2.626
+  600          -6.178438          -1.80            2.625|2.625|2.625
+  700          -6.178668          -0.23            2.627|2.627|2.627
+
+[cw] All results written to: convergence_results_cw.csv
+[cw] Done.
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 28391494: <convtest-cw.py> in cluster <dcc> Done
+
+Job <convtest-cw.py> was submitted from host <n-62-9-41> by user <s260438> in cluster <dcc> at Fri May  8 10:18:19 2026
+Job was executed on host(s) <16*n-62-29-5>, in queue <hpc>, as user <s260438> in cluster <dcc> at Fri May  8 17:32:10 2026
+</zhome/ae/1/229651> was used as the home directory.
+</zhome/ae/1/229651/convtest_MnTe2> was used as the working directory.
+Started at Fri May  8 17:32:10 2026
+Terminated at Fri May  8 19:38:39 2026
+Results reported at Fri May  8 19:38:39 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash -l
+export MYQUEUE_TASK_ID=$LSB_JOBID
+mq=/zhome/ae/1/229651/.myqueue/lsf-$MYQUEUE_TASK_ID
+source /zhome/ae/1/229651/venv/bin/activate
+echo "venv: /zhome/ae/1/229651/venv/bin/activate"
+(touch $mq-0 && \
+ cd '/zhome/ae/1/229651/convtest_MnTe2' && \
+ mpiexec python3 convtest-cw.py && \
+ touch $mq-1) || \
+(touch $mq-2; exit 1)
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   121029.02 sec.
+    Max Memory :                                 33871 MB
+    Average Memory :                             15302.82 MB
+    Total Requested Memory :                     98304.00 MB
+    Delta Memory :                               64433.00 MB
+    Max Swap :                                   -
+    Max Processes :                              21
+    Max Threads :                                73
+    Run time :                                   7589 sec.
+    Turnaround time :                            33620 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file </zhome/ae/1/229651/convtest_MnTe2/convtest-cw.py.28391494.err> for stderr output of this job.
+

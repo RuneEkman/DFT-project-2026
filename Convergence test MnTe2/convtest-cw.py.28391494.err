@@ -1,0 +1,10 @@
+Modules Release 4.8.0 (2021-07-14)
+DCC-SW: Added modules (2023-aug/XeonE5-2660v3)
+DCC-SW: Removed standard modules: /apps/dcc/etc/ModulesAlma92/modulefiles
+DCC-SW: Using gnu/12.3.0 compiler (requested)
+Loading python/3.11.7
+  Loading requirement: build-tools/1.0 gcc/12.3.0 zlib/2.0.7 expat/2.5.0
+    libffi/3.4.4
+Loading scalapack/2.2.0
+  Loading requirement: numactl/2.0.16 libxml2/2.10.3 hwloc/2.9.0 ucx/1.14.0
+    openmpi/4.1.6

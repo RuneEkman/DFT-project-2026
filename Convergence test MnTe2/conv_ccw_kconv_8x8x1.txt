@@ -1,0 +1,357 @@
+  ___ ___ ___ _ _ _
+ |   |   |_  | | | |
+ | | | | | . | | | |
+ |__ |  _|___|_____| - 25.7.1b1
+ |___|_|
+
+User:   s260438@n-62-29-13
+Date:   Fri May  8 17:17:40 2026
+Arch:   x86_64
+Pid:    109960
+CWD:    /zhome/ae/1/229651/convtest_MnTe2
+Python: 3.11.7
+gpaw:   /zhome/ae/1/229651/venv/gpaw/gpaw (fd205d5876)
+_gpaw:  /zhome/ae/1/229651/venv/gpaw/
+        _gpaw.cpython-311-x86_64-linux-gnu.so (fd205d5876)
+ase:    /zhome/ae/1/229651/venv/ase/ase (version 3.28.0b1-536df4049d)
+numpy:  /zhome/ae/1/229651/venv/lib/python3.11/site-packages/numpy (version 2.4.2)
+scipy:  /zhome/ae/1/229651/venv/lib/python3.11/site-packages/scipy (version 1.17.0)
+libxc:  6.1.0
+units:  Angstrom and eV
+cores: 16
+OpenMP: False
+OMP_NUM_THREADS: 1
+
+input parameters:
+  mode=PW(ecut=300),
+  convergence={'density': 0.0005, 'energy': 0.0001, 'eigenstates': 4e-08},
+  kpts=MonkhorstPack(size=(8, 8, 1), gamma=True),
+  magmoms=array([[ 0.        ,  2.8       ,  0.        ],
+         [ 0.        ,  0.        ,  0.        ],
+         [ 0.        ,  0.        ,  0.        ],
+         [-2.42487113, -1.4       ,  0.        ],
+         [ 0.        ,  0.        ,  0.        ],
+         [ 0.        ,  0.        ,  0.        ],
+         [ 2.42487113, -1.4       ,  0.        ],
+         [ 0.        ,  0.        ,  0.        ],
+         [ 0.        ,  0.        ,  0.        ]]),
+  maxiter=200,
+  mixer=Mixer(backend='pulay', beta=0.05, method='sum', nmaxold=5, weight=100),
+  occupations=Occupations(name='fermi-dirac', width=0.01, fixmagmom=False),
+  parallel={'domain': 1, 'kpt': 16, 'band': 1},
+  soc=False,
+  spinpol=True,
+  symmetry=Symmetry(point_group=False, time_reversal=False),
+  xc=XC(name='LDA')
+
+environment variables:
+  GPAW_CPUPY=False,
+  GPAW_DEBUG=False,
+  GPAW_INITIALIZE_MPI=True,
+  GPAW_MPI_BACKEND='cgpaw',
+  GPAW_NEW=0,
+  GPAW_NO_C_EXTENSION=False,
+  GPAW_NO_GPU_MPI=False,
+  GPAW_TRACE=False,
+  GPAW_USE_GPUS=False
+
+Diagonalizing LCAO Hamiltonian
+Converting LCAO to pw mode
+                            
+                            
+                            
+                            
+              Te            
+                            
+        Ten      Ten        
+                            
+            MnTe            
+                            
+        Te       Te         
+                            
+                            
+                            
+                            
+
+Atomic positions and initial magnetic moments
+
+Positions:
+   0 Mn     0.000000    0.000000    9.112691    ( 0.0000,  2.8000,  0.0000)
+   1 Te     1.830032    1.056570   10.757277    ( 0.0000,  0.0000,  0.0000)
+   2 Te     1.830032    1.056570    7.468106    ( 0.0000,  0.0000,  0.0000)
+   3 Mn    -1.830032    3.169709    9.112691    (-2.4249, -1.4000,  0.0000)
+   4 Te    -0.000000    4.226279   10.757277    ( 0.0000,  0.0000,  0.0000)
+   5 Te    -0.000000    4.226279    7.468106    ( 0.0000,  0.0000,  0.0000)
+   6 Mn     1.830032    3.169709    9.112691    ( 2.4249, -1.4000,  0.0000)
+   7 Te    -1.830032    1.056570   10.757277    ( 0.0000,  0.0000,  0.0000)
+   8 Te    -1.830032    1.056570    7.468106    ( 0.0000,  0.0000,  0.0000)
+
+Unit cell:
+           periodic     x           y           z      points  spacing
+  1. axis:    yes    5.490097    3.169709    0.000000    27     0.2033
+  2. axis:    yes   -5.490097    3.169709    0.000000    27     0.2033
+  3. axis:    yes    0.000000    0.000000   18.225383    75     0.2430
+
+  Lengths:   6.339419   6.339419  18.225383
+  Angles:   90.000000  90.000000 120.000000
+
+Effective grid spacing dv^(1/3) = 0.2264
+
+symmetry:
+  number of symmetries: 1
+  rotations: [
+    [[ 1,  0,  0], [ 0,  1,  0], [ 0,  0,  1]]]
+
+bz sampling:
+  number of bz points: 64
+  number of ibz points: 64
+  monkhorst-pack size: [8, 8, 1]
+  monkhorst-pack shift: [0.0625, 0.0625, 0.0]
+  points and weights: [
+    [[ -0.37500000,  -0.37500000,   0.00000000], 0.01562500],  # 0
+    [[ -0.37500000,  -0.25000000,   0.00000000], 0.01562500],  # 1
+    [[ -0.37500000,  -0.12500000,   0.00000000], 0.01562500],  # 2
+    [[ -0.37500000,   0.00000000,   0.00000000], 0.01562500],  # 3
+    [[ -0.37500000,   0.12500000,   0.00000000], 0.01562500],  # 4
+    [[ -0.37500000,   0.25000000,   0.00000000], 0.01562500],  # 5
+    [[ -0.37500000,   0.37500000,   0.00000000], 0.01562500],  # 6
+    [[ -0.37500000,   0.50000000,   0.00000000], 0.01562500],  # 7
+    [[ -0.25000000,  -0.37500000,   0.00000000], 0.01562500],  # 8
+    [[ -0.25000000,  -0.25000000,   0.00000000], 0.01562500],  # 9
+    # ...
+    [[  0.50000000,   0.50000000,   0.00000000], 0.01562500]]  # 63
+
+plane wave coefficients: 7508
+cutoff: 300.0 eV
+
+spin-components: 4 (non-collinear spins)
+bands: 106
+projectors: 48
+spin-degeneracy: 1
+dtype: complex128
+
+memory:
+    storage: CPU
+    wave functions: 1_627_942_912 bytes (101_746_432 per core)
+    projectors: 445_380_608 bytes (27_836_288 per core)
+
+parallelization:
+    kpt:    16
+    domain: 1
+    band:   1
+
+density:
+  valence electrons: 81.0
+  components: 4
+  grid points: [27 27 75]
+  charge: 0.0  # |e|
+
+potential:
+  grid points: [27 27 75]
+
+species:
+  Mn:
+    name: Manganese
+    id: 0d715a8018be061a6e9ea6f2d364ac92
+    Z: 25.0
+    valence: 15
+    core: 10
+    charge: 0.0
+    file: /zhome/ae/1/229651/venv/lib/python3.11/site-packages/gpaw_data/setups/Mn.LDA.gz
+    compensation charges: {type: gauss,
+                           rc: 0.38,
+                           lmax: 2}
+    cutoffs: {filter: 2.14,
+              core: 0.86}
+    projectors:
+      #              energy  rcut
+      - 3s(2.00)   -85.387   1.275
+      - 4s(2.00)    -5.282   1.275
+      - 3p(6.00)   -54.493   1.281
+      - 4p(0.00)    -1.471   1.281
+      - 3d(5.00)    -7.009   1.138
+      -  d          20.203   1.138
+  
+    # Using partial waves for Mn as LCAO basis
+
+  Te:
+    name: Tellurium
+    id: fe52195436feef209ec398cc66414a6e
+    Z: 52.0
+    valence: 6
+    core: 46
+    charge: 0.0
+    file: /zhome/ae/1/229651/venv/lib/python3.11/site-packages/gpaw_data/setups/Te.LDA.gz
+    compensation charges: {type: gauss,
+                           rc: 0.36,
+                           lmax: 2}
+    cutoffs: {filter: 2.09,
+              core: 3.17}
+    projectors:
+      #              energy  rcut
+      - 5s(2.00)   -15.337   1.180
+      - 5p(4.00)    -6.113   1.196
+      -  s          11.875   1.180
+      -  p          21.098   1.196
+      -  d           0.000   1.238
+  
+    # Using partial waves for Te as LCAO basis
+
+Reference energy: -1202191.392782  # eV
+
+eigensolver:
+  {'converge_bands': 'occupied', 'name': 'PPCG', 'niter': 2}
+Density mixing:
+  Method: sum
+  Backend: pulay
+  Linear mixing parameter: 0.05
+  old densities: 5
+  Damping of long wavelength oscillations: 100
+occupation numbers:
+  Fermi-Dirac:
+    width: 0.0100  # eV
+  
+
+<gpaw.new.pw.paw_poisson.SlowPAWPoissonSolver object at 0x7eff4a0875d0>
+xc functional:
+  name: None
+
+convergence criteria:
+- Maximum integral of absolute [dens]ity change: 0.0005 electrons / valence electron
+- Maximum [total energy] change in last 3 cyles: 0.0001 eV / valence electron
+- Maximum integral of absolute [eigenst]ate change: 4e-08 eV^2 / valence electron
+maximum number of iterations: 200
+
+     iter     time        total  log10-change:
+                         energy   eigst   dens
+iter:   1 17:18:30   -58.832567   +0.38          +0.0,+0.0,+0.0
+iter:   2 17:18:58   -55.449686   -0.66  -1.05   -0.0,+0.0,-0.0
+iter:   3 17:19:26   -55.233792   -1.29  -1.31   +0.0,-0.0,-0.0
+iter:   4 17:19:54   -55.115730   -1.38  -1.41   -0.0,+0.0,-0.0
+iter:   5 17:20:22   -55.244122   -1.50  -1.63   +0.0,-0.0,+0.0
+iter:   6 17:20:51   -55.193417   -2.04  -1.86   +0.0,+0.0,+0.0
+iter:   7 17:21:19   -55.108372   -2.08  -2.09   +0.0,-0.0,+0.0
+iter:   8 17:21:47   -55.110257   -3.22  -2.45   +0.0,-0.0,+0.0
+iter:   9 17:22:15   -55.116039c  -3.20  -2.47   +0.0,-0.0,+0.0
+iter:  10 17:22:43   -55.114123c  -3.44  -2.75   +0.0,-0.0,+0.0
+iter:  11 17:23:11   -55.114483c  -4.02  -3.09   +0.0,-0.0,+0.0
+iter:  12 17:23:39   -55.115165c  -4.22  -3.10   +0.0,-0.0,+0.0
+iter:  13 17:24:07   -55.115229c  -4.53  -3.33c  +0.0,-0.0,+0.0
+iter:  14 17:24:35   -55.115280c  -4.78  -3.35c  +0.0,-0.0,+0.0
+iter:  15 17:25:02   -55.115461c  -4.89  -3.36c  +0.0,-0.0,+0.0
+iter:  16 17:25:30   -55.115496c  -4.80  -3.52c  +0.0,-0.0,+0.0
+iter:  17 17:25:58   -55.115511c  -5.34  -4.02c  +0.0,-0.0,+0.0
+iter:  18 17:26:26   -55.115519c  -5.60  -4.16c  +0.0,-0.0,+0.0
+iter:  19 17:26:54   -55.115545c  -5.85  -4.22c  +0.0,-0.0,+0.0
+iter:  20 17:27:22   -55.115588c  -5.94  -4.29c  +0.0,-0.0,+0.0
+iter:  21 17:27:51   -55.115593c  -6.26  -4.51c  +0.0,-0.0,+0.0
+iter:  22 17:28:19   -55.115593c  -6.46  -4.59c  +0.0,-0.0,+0.0
+iter:  23 17:28:47   -55.115594c  -6.67  -4.55c  +0.0,-0.0,+0.0
+iter:  24 17:29:14   -55.115592c  -6.86  -4.56c  +0.0,-0.0,+0.0
+iter:  25 17:29:42   -55.115595c  -7.08  -4.56c  +0.0,-0.0,+0.0
+iter:  26 17:30:10   -55.115594c  -7.28  -4.55c  +0.0,-0.0,+0.0
+iter:  27 17:30:38   -55.115590c  -7.41c -4.56c  +0.0,-0.0,+0.0
+Converged in 27 steps
+Energy contributions relative to reference atoms: (reference = -1202191.392782)
+
+kinetic:          42.799292
+coulomb:         -40.709926
+zero:              0.467996
+external:          0.000000
+xc:              -57.672612
+entropy:          -0.000678
+spinorbit:         0.000000
+----------------------------
+Free energy:     -55.115929
+Extrapolated:    -55.115590
+
+dipole moment: [0.000000, -68.669890, -0.001575]  # |e|*Ang
+
+total magnetic moment: [0.000004, -0.000117, 0.000012]
+
+local magnetic moments: [
+  [ 0.000016,  2.583669,  0.000007],  # Mn 0
+  [ 0.000001, -0.000000, -0.000000],  # Te 1
+  [ 0.000001, -0.000000, -0.000000],  # Te 2
+  [-2.237500, -1.291883,  0.000003],  # Mn 3
+  [-0.000000,  0.000002, -0.000000],  # Te 4
+  [-0.000000,  0.000002, -0.000000],  # Te 5
+  [ 2.237488, -1.291905,  0.000003],  # Mn 6
+  [-0.000001, -0.000000, -0.000000],  # Te 7
+  [-0.000001, -0.000000, -0.000000]]  # Te 8
+
+
+Fermi level: -0.363
+
+kpt = [-0.375, -0.375, 0.000], weight = 0.016:
+  Band      eig [eV]   occ [0-1]
+     0       -80.565       1.000
+   ...
+    73        -1.840       1.000
+    74        -1.840       1.000
+    75        -1.749       1.000
+    76        -1.749       1.000
+    77        -1.638       1.000
+    78        -1.154       1.000
+    79        -1.154       1.000
+    80        -1.100       1.000
+    81        -0.199       0.000
+    82        -0.199       0.000
+    83        -0.159       0.000
+    84        -0.017       0.000
+    85        -0.017       0.000
+    86         0.098       0.000
+    87         0.100       0.000
+    88         0.100       0.000
+   ...
+   105         3.642       0.000
+
+kpt = [-0.375, -0.250, 0.000], weight = 0.016:
+  Band      eig [eV]   occ [0-1]
+     0       -80.565       1.000
+   ...
+    73        -1.840       1.000
+    74        -1.840       1.000
+    75        -1.749       1.000
+    76        -1.749       1.000
+    77        -1.638       1.000
+    78        -1.154       1.000
+    79        -1.154       1.000
+    80        -1.100       1.000
+    81        -0.199       0.000
+    82        -0.199       0.000
+    83        -0.159       0.000
+    84        -0.017       0.000
+    85        -0.017       0.000
+    86         0.098       0.000
+    87         0.100       0.000
+    88         0.100       0.000
+   ...
+   105         3.642       0.000
+
+kpt = [-0.375, -0.125, 0.000], weight = 0.016:
+  Band      eig [eV]   occ [0-1]
+     0       -80.565       1.000
+   ...
+    73        -1.813       1.000
+    74        -1.776       1.000
+    75        -1.748       1.000
+    76        -1.729       1.000
+    77        -1.721       1.000
+    78        -1.474       1.000
+    79        -1.209       1.000
+    80        -1.144       1.000
+    81        -0.247       0.000
+    82        -0.187       0.000
+    83        -0.177       0.000
+    84        -0.120       0.000
+    85        -0.112       0.000
+    86        -0.074       0.000
+    87         0.012       0.000
+    88         0.071       0.000
+   ...
+   105         3.859       0.000
+(only showing first 3 out of 64 k-points)
+
+No gap
+No difference between direct/indirect transitions
