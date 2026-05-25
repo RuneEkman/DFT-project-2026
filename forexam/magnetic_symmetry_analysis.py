@@ -168,7 +168,7 @@ def analyse_magnetic_symmetry(supercell, theta: float = 0, phi: float = 0,
         # A spin spiral with normal n_hat is expected to have a mirror plane
         # perpendicular to n_hat combined with time-reversal (m ⊥ n_hat + TR).
         # This checks whether that specific operation is present in the MSG.
-        _check_nhat_mirror(dataset_mag, n_hat)
+        _check_nhat_mirror(dataset_mag, n_hat, lattice)
 
     # ─────────────────────────────────────────────────────────────────────────
 
@@ -184,17 +184,18 @@ def analyse_magnetic_symmetry(supercell, theta: float = 0, phi: float = 0,
         _run()
 
 
-def _check_nhat_mirror(dataset_mag, n_hat, tol: float = 0.05):
+def _check_nhat_mirror(dataset_mag, n_hat, lattice, tol: float = 0.05):
     """
     Check whether the MSG contains a mirror perpendicular to n_hat + TR.
 
-    This is the symmetry expected for a proper spin spiral: the mirror plane
-    whose normal is n_hat reverses the sense of rotation of the spiral, which
-    must be compensated by time-reversal to restore the structure.
+    spglib rotation matrices are in fractional coordinates. To test whether
+    one maps a Cartesian vector n_hat to -n_hat we convert to Cartesian first:
 
-    The check works in Cartesian space by applying each MSG rotation (that has
-    TR=1) to n_hat and testing whether the result is ±n_hat — which is the
-    signature of a mirror whose normal is n_hat.
+        R_cart = A^T @ R_frac @ (A^T)^{-1}
+
+    where A is the 3x3 matrix whose ROWS are the lattice vectors (ASE convention).
+    This is exact for any n_hat direction, including exotic ones not aligned
+    with any lattice vector.
     """
     W = 58
     print()
@@ -210,17 +211,13 @@ def _check_nhat_mirror(dataset_mag, n_hat, tol: float = 0.05):
     n_hat = np.asarray(n_hat, dtype=float)
     n_hat = n_hat / np.linalg.norm(n_hat)
 
-    # We need the lattice to convert rotation matrices (fractional) → Cartesian.
-    # The rotations in spglib are in fractional coordinates, so we transform:
-    #   R_cart = A @ R_frac @ A⁻¹   where A = lattice matrix (rows = vectors)
-    # However, for the mirror-normal test we can work directly: a mirror with
-    # normal n_hat satisfies R @ n_hat = -n_hat (the normal is the eigenvector
-    # with eigenvalue -1). We test this in the Cartesian frame but the rotation
-    # matrices from spglib are in fractional coordinates, so we must convert.
-    #
-    # For simplicity we test the fractional representation of n_hat instead,
-    # which is exact for the cases that matter (n_hat along a lattice direction).
-    # For a general n_hat we do the full Cartesian conversion below.
+    # Basis-change matrices.
+    # ASE stores lattice vectors as rows of A, so the column matrix of basis
+    # vectors is A^T.  The similarity transform is:
+    #   R_cart = A^T @ R_frac @ (A^T)^{-1}
+    A     = np.array(lattice, dtype=float)
+    AT    = A.T
+    AT_inv = np.linalg.inv(AT)
 
     found = False
     found_ops = []
@@ -231,10 +228,13 @@ def _check_nhat_mirror(dataset_mag, n_hat, tol: float = 0.05):
         if tr != 1:
             continue
 
-        R = np.array(R_frac, dtype=float)
+        R_frac = np.array(R_frac, dtype=float)
 
-        # Test: does R map n_hat → -n_hat?
-        Rn = R @ n_hat
+        # Convert fractional → Cartesian rotation matrix
+        R_cart = AT @ R_frac @ AT_inv
+
+        # Mirror test: a mirror with normal n_hat satisfies R_cart @ n_hat == -n_hat
+        Rn = R_cart @ n_hat
         if np.allclose(Rn, -n_hat, atol=tol):
             found = True
             found_ops.append(i)
@@ -253,3 +253,4 @@ def _check_nhat_mirror(dataset_mag, n_hat, tol: float = 0.05):
         print(f"     or that mag_symprec needs further tuning.")
 
     print("=" * W)
+
